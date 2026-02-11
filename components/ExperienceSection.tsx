@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { ExperienceItem } from '../types';
-import { MapPin, Calendar, Filter, Tags } from 'lucide-react';
+import { MapPin, Calendar, Filter } from 'lucide-react';
 
 interface ExperienceSectionProps {
   experience: ExperienceItem[];
@@ -9,7 +9,7 @@ interface ExperienceSectionProps {
 const ExperienceSection: React.FC<ExperienceSectionProps> = ({ experience }) => {
   const [activeTags, setActiveTags] = useState<string[]>([]);
 
-  // Extract all unique tags for the filter list, normalized to uppercase to avoid duplicates
+  // Extract all unique tags, normalized to uppercase for deduplication
   const allTags = useMemo(() => {
     const tagsSet = new Set<string>();
     experience.forEach(exp => {
@@ -20,7 +20,7 @@ const ExperienceSection: React.FC<ExperienceSectionProps> = ({ experience }) => 
 
   const filteredExperience = experience.filter(exp => {
     if (activeTags.length === 0) return true;
-    // Inclusive filtering (OR): show if ANY active tag matches ANY of item's tags
+    // Inclusive filtering (OR): show if item has AT LEAST ONE of the active tags
     return exp.tags?.some(tag => activeTags.includes(tag.toUpperCase()));
   });
 
@@ -33,7 +33,7 @@ const ExperienceSection: React.FC<ExperienceSectionProps> = ({ experience }) => 
   return (
     <div className="max-w-5xl mx-auto relative z-20">
       
-      {/* Filter Control */}
+      {/* Filter Control - Multi-row, wrapped tags */}
       <div className="mb-12 space-y-4 px-4">
         <div className="flex items-start gap-4 p-6 bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
           <div className="mt-1.5 p-2 bg-slate-50 rounded-lg text-slate-400 shrink-0">
@@ -59,7 +59,6 @@ const ExperienceSection: React.FC<ExperienceSectionProps> = ({ experience }) => 
               )}
             </div>
             
-            {/* Tag Cloud - Multiple rows, no scroll */}
             <div className="flex flex-wrap gap-2">
               {allTags.map(tag => (
                 <button
@@ -97,17 +96,13 @@ const ExperienceSection: React.FC<ExperienceSectionProps> = ({ experience }) => 
           filteredExperience.map((exp, index) => (
             <div key={exp.id} className={`relative mb-16 flex flex-col md:flex-row ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
               
-              {/* Timeline Dot */}
               <div className="absolute left-8 md:left-1/2 top-8 w-4 h-4 bg-white rounded-full border-4 border-red-500 z-10 shadow-sm -ml-2 hidden md:block" />
               
-              {/* Empty Space for the other side */}
               <div className="hidden md:block md:w-1/2" />
 
-              {/* Card */}
               <div className={`px-4 md:px-0 md:w-1/2 ${index % 2 === 0 ? 'md:pr-12' : 'md:pl-12'}`}>
                 <div className="bg-white rounded-xl shadow-lg shadow-slate-200/50 border border-slate-100 overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group relative z-20">
                   
-                  {/* Header */}
                   <div className="p-6 border-b border-slate-50 bg-slate-50/50">
                     <div className="flex flex-wrap gap-2 mb-3">
                        {exp.tags?.map((tag, i) => (
@@ -134,7 +129,6 @@ const ExperienceSection: React.FC<ExperienceSectionProps> = ({ experience }) => 
                      </div>
                   </div>
                   
-                  {/* Body */}
                   <div className="p-6 space-y-6">
                     <div>
                       <p className="text-slate-600 leading-relaxed text-sm">
@@ -142,7 +136,6 @@ const ExperienceSection: React.FC<ExperienceSectionProps> = ({ experience }) => 
                       </p>
                     </div>
 
-                    {/* Key Achievements */}
                     {exp.highlights.length > 0 && (
                       <div>
                         <h5 className="text-xs font-bold text-slate-900 uppercase tracking-wide mb-3 flex items-center gap-2">
@@ -160,7 +153,6 @@ const ExperienceSection: React.FC<ExperienceSectionProps> = ({ experience }) => 
                       </div>
                     )}
                     
-                    {/* Key Projects */}
                     {exp.skills && exp.skills.length > 0 && (
                       <div className="pt-4 border-t border-slate-50">
                         <h5 className="text-[10px] font-bold text-slate-400 uppercase tracking-wide mb-3">Key Projects</h5>

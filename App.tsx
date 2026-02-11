@@ -2,15 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { INITIAL_CV_DATA } from './constants';
 import { CVData } from './types';
 import ExperienceSection from './components/ExperienceSection';
-import AdminPanel from './components/AdminPanel';
 import ScrollNavigation from './components/ScrollNavigation';
 import GameOverlay from './components/GameOverlay';
 import CaptchaModal from './components/CaptchaModal';
-import { Settings, Award, BookOpen, Quote, Heart, Mail, ArrowRight, Linkedin, Download, Send, Cpu, PieChart, Users, Lightbulb, TrendingUp, Anchor } from 'lucide-react';
+import { Award, BookOpen, Quote, Heart, Mail, Linkedin, Download, Send, Cpu, PieChart, Users, Lightbulb, TrendingUp, Anchor } from 'lucide-react';
 
 const App: React.FC = () => {
   const [data, setData] = useState<CVData>(INITIAL_CV_DATA);
-  const [isAdminOpen, setIsAdminOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   
   // Captcha State
@@ -28,11 +26,6 @@ const App: React.FC = () => {
     }
     setMounted(true);
   }, []);
-
-  const handleUpdate = (newData: CVData) => {
-    setData(newData);
-    localStorage.setItem('cv_data', JSON.stringify(newData));
-  };
 
   // Action handlers triggered after captcha success
   const handleCaptchaSuccess = () => {
@@ -87,14 +80,6 @@ const App: React.FC = () => {
         isOpen={captchaOpen}
         onClose={() => setCaptchaOpen(false)}
         onSuccess={handleCaptchaSuccess}
-      />
-
-      {/* Admin Panel (Hidden trigger by default, can be toggled manually in dev) */}
-      <AdminPanel 
-        isOpen={isAdminOpen} 
-        onClose={() => setIsAdminOpen(false)} 
-        data={data}
-        onUpdate={handleUpdate}
       />
 
       {/* Hero Section */}
@@ -343,8 +328,8 @@ const App: React.FC = () => {
       {/* Contact & Footer Section (Very Dark) */}
       <section id="contact" className="h-screen w-full snap-start flex flex-col bg-slate-950 text-white border-t border-slate-900 overflow-hidden">
          <div className="flex-1 w-full overflow-y-auto px-6 py-24 flex items-center justify-center no-scrollbar">
-           <div className="max-w-4xl mx-auto w-full relative z-20">
-              <div className="text-center mb-16">
+           <div className="max-w-4xl mx-auto w-full relative z-20 text-center">
+              <div className="mb-16">
                 <h2 className="text-4xl font-bold mb-6">Let's Connect</h2>
                 <p className="text-slate-400 text-lg">
                   Interested in working together? Drop me a message.
