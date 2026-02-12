@@ -40,7 +40,7 @@ export const INITIAL_CV_DATA: CVData = {
       highlights: [
         "Formulated strategy across teams, led research on regulatory hurdles & strategic partners to launch operations in 17 new markets across APAC, LatAm and the Middle East.",
         "Influenced across the business to operationalise cross-functional teams, reducing time to market from 16+ to 4 weeks, resulting in 80+ hours/week operational overhead reduction.",
-        "Launched on-platform FX in 40 currencies, driving 50% uplift in revenue across 100million volume."
+        "Launched on-platform FX in 40 currencies, driving 50+ uplift in revenue across 100million volume."
       ],
       skills: ["FX", "Virtual Accounts", "Accounts Payable", "Global Expansion (EMEA, Asia, LatAm)", "Billing Optimisation", "Core Ledger"],
       tags: ["B2B2B2C", "SAAS", "PAYMENTS", "TREASURY", "FUNDING", "OPERATIONS", "AI", "ACCOUNTS PAYABLE"]

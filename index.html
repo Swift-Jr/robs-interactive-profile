@@ -10,7 +10,7 @@
         theme: {
           extend: {
             colors: {
-              primary: '#ef4444', // Matches the red RG logo
+              primary: '#ef4444',
               secondary: '#1e293b',
             },
             fontFamily: {
@@ -28,14 +28,12 @@
       body {
         font-family: 'Inter', sans-serif;
       }
-      /* Hide scrollbar for chrome/safari/opera */
       .no-scrollbar::-webkit-scrollbar {
         display: none;
       }
-      /* Hide scrollbar for IE, Edge and Firefox */
       .no-scrollbar {
-        -ms-overflow-style: none;  /* IE and Edge */
-        scrollbar-width: none;  /* Firefox */
+        -ms-overflow-style: none;
+        scrollbar-width: none;
       }
     </style>
   <script type="importmap">
@@ -52,5 +50,7 @@
 </head>
   <body class="bg-slate-50 text-slate-900 antialiased selection:bg-red-100 selection:text-red-900">
     <div id="root"></div>
+    <!-- Load the React application entry point -->
+    <script type="module" src="/index.tsx"></script>
   </body>
 </html>
