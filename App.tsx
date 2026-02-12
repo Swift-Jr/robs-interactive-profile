@@ -79,7 +79,7 @@ const App: React.FC = () => {
   if (!mounted) return null;
 
   return (
-    <div className="h-screen w-full overflow-y-scroll snap-y snap-mandatory scroll-smooth font-sans text-slate-900 bg-white">
+    <div className="h-screen w-full overflow-y-auto snap-y snap-mandatory font-sans text-slate-900 bg-white">
       <GameOverlay />
       <ScrollNavigation />
       
@@ -87,13 +87,6 @@ const App: React.FC = () => {
         isOpen={captchaOpen}
         onClose={() => setCaptchaOpen(false)}
         onSuccess={handleCaptchaSuccess}
-      />
-
-      <AdminPanel 
-        isOpen={isAdminOpen}
-        onClose={() => setIsAdminOpen(false)}
-        data={data}
-        onUpdate={handleUpdate}
       />
 
       {/* Hero Section */}
